@@ -1,19 +1,20 @@
-import { C_CENTER, PLAYER_DIM } from "./contances.js";
+import { C_CENTER, DEFAULT_BALL_SPEED, MAX_SPEED_BALL, PLAYER_DIM, SPEED_BALL_INCREAMENT } from "./contances.js";
 
 export class Ball
 {
-    constructor(x,y, context)
+    constructor(x,y, context, statsBar)
     {
         this.x = x;
         this.y = y;
         this.h = 20;
         this.w = 20;
-        this.angle = 90;
+        this.angle = 45;
         this.context = context;
         this.running = false;
-        this.speed = 256;
+        this.speed = DEFAULT_BALL_SPEED;
         this.sens = 1;
         this.loose = false;
+        this.statsBar = statsBar;
     }
     getPosY()
     {
@@ -23,14 +24,19 @@ export class Ball
     {
         return this.x;
     }
-    collide()
+    getSpeed()
+    {
+        return this.speed;
+    }
+    collide(statsBar)
     {
         this.sens = -1;
         this.x -= 10;
-        this.speed += 50;
+        this.speed += SPEED_BALL_INCREAMENT;
 
         this.angle *= -1;
 
+        statsBar.addPts();
     }
     update(delta_time, player1)
     {
@@ -45,7 +51,8 @@ export class Ball
             this.context.rect(this.x, this.y, this.w, this.h);
             this.context.fill();
 
-            this.collide_wall_check(player1);
+            this.collide_wall_check(player1)
+
         }
         else if(!this.running && this.loose)
         {
@@ -74,6 +81,7 @@ export class Ball
     {
         // angle limit
         if(this.angle < -360 || this.angle > 360) this.angle = 45 * this.sens;
+        if(this.speed > MAX_SPEED_BALL) this.speed = MAX_SPEED_BALL;
 
         // player1
         if(
@@ -118,7 +126,8 @@ export class Ball
 
         this.x = x;
         this.y = y;
-        this.speed = 256;
+        this.speed = DEFAULT_BALL_SPEED;
+        this.statsBar.reset();
         this.angle = 45;
         this.running = true;
     }

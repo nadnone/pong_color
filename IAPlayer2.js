@@ -1,7 +1,7 @@
 import { C_CENTER, PLAYER_DIM } from "./contances.js";
 
 export class IA {
-    constructor(player2, context)
+    constructor(context, statsBar)
     {
         this.x = C_CENTER.w - PLAYER_DIM.w*2;
         this.y = C_CENTER.h - PLAYER_DIM.h/2;
@@ -9,6 +9,8 @@ export class IA {
         this.h = PLAYER_DIM.h;
 
         this.context = context;
+
+        this.statsBar = statsBar;
     }
     update(ball)
     {
@@ -31,7 +33,7 @@ export class IA {
             this.y + this.h > ball.getPosY()
         )
         {
-            ball.collide();
+            ball.collide(this.statsBar);
         }
     }
 
