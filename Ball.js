@@ -72,9 +72,10 @@ export class Ball
 
     collide_wall_check(player1)
     {
-        // player1
+        // angle limit
         if(this.angle < -360 || this.angle > 360) this.angle = 45 * this.sens;
 
+        // player1
         if(
             this.x < player1.getPosX() + PLAYER_DIM.w &&
             this.x + this.w > player1.getPosX() &&

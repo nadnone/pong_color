@@ -32,7 +32,6 @@ export class IA {
         )
         {
             ball.collide();
-            console.log("collide");
         }
     }
 

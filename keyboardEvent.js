@@ -4,11 +4,11 @@ function InitkeyboardEvent(player1, player2, ball)
 {
     addEventListener("keydown", (event) => {
 
-        if (event.key === "W" || event.key === "w")
+        if (event.key === "W" || event.key === "w" || event.key === "ArrowUp")
         {
             player1.addVelocity(-12);
         }
-        if (event.key === "S" || event.key === "s")
+        if (event.key === "S" || event.key === "s" || event.key === "ArrowDown")
         {
             player1.addVelocity(12);
         }
