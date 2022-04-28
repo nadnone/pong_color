@@ -25,24 +25,25 @@ export class Ball
     }
     collide()
     {
-        this.angle *= -1;
+        this.sens = -1;
         this.x -= 10;
         this.speed += 50;
-    }
 
+        this.angle *= -1;
+
+    }
     update(delta_time, player1)
     {
         if (this.running)
         {
 
-            this.x += Math.sin(this.angle) * this.speed * delta_time * this.sens;
-            this.y += Math.cos(this.angle) * this.speed * delta_time * this.sens;
+            this.x += Math.sin(this.angle) * this.speed * delta_time;
+            this.y += Math.cos(this.angle) * this.speed * delta_time;
           
             this.context.beginPath();
             this.context.fillStyle = "#00FF00"
             this.context.rect(this.x, this.y, this.w, this.h);
             this.context.fill();
-
 
             this.collide_wall_check(player1);
         }
@@ -63,10 +64,17 @@ export class Ball
             this.context.fillText("To play !", C_CENTER.x/1.33, C_CENTER.y*1.2);
             this.context.fill();
         }
+
+
     }
+
+
+
     collide_wall_check(player1)
     {
         // player1
+        if(this.angle < -360 || this.angle > 360) this.angle = 45 * this.sens;
+
         if(
             this.x < player1.getPosX() + PLAYER_DIM.w &&
             this.x + this.w > player1.getPosX() &&
@@ -74,33 +82,34 @@ export class Ball
             this.y + this.h > player1.getPosY()
         )
         {
-            this.sens *= -1;
-            this.x = 30;
+            this.sens = 1;
+            this.angle *= -1;
+            this.x += 30;
         }
         // top
-        else if(this.y < 0)
+        if(this.y < 0)
         {
-            this.angle += 45;
-            this.y += 10;
+            this.angle = 135 - this.angle;
+            this.y += 10 ;
         }
         // bottom
         else if(this.y + this.h > C_CENTER.h)
         {
-            this.angle += 45;
+            this.angle = 135 - this.angle;
             this.y -= 10;
         }
         // right
         else if(this.x + this.w > C_CENTER.w)
         {
-            this.sens *= -1;
-            this.x -= 10;
+            // ca n'arrivera jamais :)
         }
-        // right
-        else if(this.x < 0)
+        // left
+        if(this.x < 0)
         {
             this.running = false;
             this.loose = true;
         }
+
 
     }
 

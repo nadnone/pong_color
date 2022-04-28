@@ -9,7 +9,7 @@ export class Player {
         context.fill();
 
         this.velocity_y = 0;
-        this.SPEED = 24;
+        this.SPEED = 32;
         this.context = context;
 
         this.posY = C_CENTER.y;
