@@ -1,4 +1,4 @@
-import { C_CENTER } from "./contances.js";
+import { C_CENTER } from "./constantes.js";
 
 export class StatsBar {
     constructor(context)

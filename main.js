@@ -1,4 +1,4 @@
-import { C_CENTER } from './contances.js'
+import { C_CENTER } from './constantes.js'
 import { InitkeyboardEvent } from './keyboardEvent.js'
 import { Player } from './Player.js'
 import { gameloop } from './gameloop.js'

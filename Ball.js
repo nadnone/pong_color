@@ -1,4 +1,4 @@
-import { C_CENTER, DEFAULT_BALL_SPEED, MAX_SPEED_BALL, PLAYER_DIM, SPEED_BALL_INCREAMENT } from "./contances.js";
+import { C_CENTER, DEFAULT_BALL_SPEED, MAX_SPEED_BALL, PLAYER_DIM, SPEED_BALL_INCREAMENT } from "./constantes.js";
 
 export class Ball
 {

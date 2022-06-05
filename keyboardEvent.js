@@ -1,4 +1,4 @@
-import { PLAYER_DIM } from "./contances.js";
+import { PLAYER_DIM } from "./constantes.js";
 
 function InitkeyboardEvent(player1, player2, ball)
 {

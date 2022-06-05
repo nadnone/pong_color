@@ -1,4 +1,4 @@
-import { C_CENTER, PLAYER_DIM } from "./contances.js";
+import { C_CENTER, PLAYER_DIM } from "./constantes.js";
 
 export class IA {
     constructor(context, statsBar)
