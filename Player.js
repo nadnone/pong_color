@@ -31,14 +31,16 @@ export class Player {
         return this.posX;
     }
     addVelocity(velocity){
-        if (velocity > 24 ) velocity = 24;
-        else if (velocity < -24) velocity = -24;
+
+
+        if (velocity > 6 ) velocity = 6;
+        else if (velocity < -6) velocity = -6;
 
         this.velocity_y += velocity;
 
     }
 
-    update(time){
+    update(){
 
 
 
@@ -55,8 +57,9 @@ export class Player {
         }
 
 
-        this.posY += this.velocity_y * this.SPEED * time;
+        this.posY += this.velocity_y * this.SPEED;
 
+        this.velocity_y = 0;
 
         this.context.beginPath();
         this.context.fillStyle = "#FFFFFF"

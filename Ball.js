@@ -12,7 +12,6 @@ export class Ball
         this.context = context;
         this.running = false;
         this.speed = DEFAULT_BALL_SPEED;
-        this.sens = 1;
         this.loose = false;
         this.statsBar = statsBar;
     }
@@ -28,13 +27,13 @@ export class Ball
     {
         return this.speed;
     }
-    collide(statsBar)
+    collide(statsBar, ennemyX)
     {
-        this.sens = -1;
-        this.x -= 10;
+        this.x = ennemyX - this.w;
+
         this.speed += SPEED_BALL_INCREAMENT;
 
-        this.angle *= -1;
+        this.angle = 180 - this.angle;
 
         statsBar.addPts();
     }
@@ -42,9 +41,10 @@ export class Ball
     {
         if (this.running)
         {
+            let radAngle = this.angle * Math.PI / 180
 
-            this.x += Math.sin(this.angle) * this.speed * delta_time;
-            this.y += Math.cos(this.angle) * this.speed * delta_time;
+            this.x += Math.cos(radAngle) * this.speed * delta_time;
+            this.y += Math.sin(radAngle) * this.speed * delta_time;
           
             this.context.beginPath();
             this.context.fillStyle = "#00FF00"
@@ -80,7 +80,7 @@ export class Ball
     collide_wall_check(player1)
     {
         // angle limit
-        if(this.angle < -360 || this.angle > 360) this.angle = 45 * this.sens;
+        if(this.angle < -360 || this.angle > 360) this.angle = this.angle % 360;
         if(this.speed > MAX_SPEED_BALL) this.speed = MAX_SPEED_BALL;
 
         // player1
@@ -91,21 +91,22 @@ export class Ball
             this.y + this.h > player1.getPosY()
         )
         {
-            this.sens = 1;
-            this.angle *= -1;
-            this.x += 30;
+
+            this.angle = 180 - this.angle;
+            this.x = this.w;
+
         }
-        // top
-        if(this.y < 0)
+        // top 
+        if(this.y < this.h)
         {
-            this.angle = 135 - this.angle;
-            this.y += 10 ;
+            this.angle = 360 - this.angle;
+            this.y = this.h;
         }
         // bottom
         else if(this.y + this.h > C_CENTER.h)
         {
-            this.angle = 135 - this.angle;
-            this.y -= 10;
+            this.angle = 360 - this.angle;
+            this.y = C_CENTER.h - this.h;
         }
         // right
         else if(this.x + this.w > C_CENTER.w)
@@ -113,7 +114,7 @@ export class Ball
             // ca n'arrivera jamais :)
         }
         // left
-        if(this.x < 0)
+        if(this.x - this.w < 0)
         {
             this.running = false;
             this.loose = true;

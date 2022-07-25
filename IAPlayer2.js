@@ -33,7 +33,7 @@ export class IA {
             this.y + this.h > ball.getPosY()
         )
         {
-            ball.collide(this.statsBar);
+            ball.collide(this.statsBar, this.x);
         }
     }
 

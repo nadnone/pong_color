@@ -10,7 +10,7 @@ const PLAYER_DIM = {
     "w": 20,
 }
 
-const DEFAULT_BALL_SPEED = 100;
+const DEFAULT_BALL_SPEED = 150;
 const SPEED_BALL_INCREAMENT = 50;
 const MAX_SPEED_BALL = 600;
 
